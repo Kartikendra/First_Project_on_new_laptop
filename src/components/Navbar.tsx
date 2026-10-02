@@ -1,21 +1,19 @@
-import React from "react";
-import { AppBar, Toolbar, Typography, Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Navbar() {
   return (
-    <AppBar position="static">
-      <Toolbar>
-        <Typography variant="h6" sx={{ flexGrow: 1 }}>
-          TaskFlow
-        </Typography>
-        <Button color="inherit" component={Link} to="/dashboard">
-          Dashboard
-        </Button>
-        <Button color="inherit" component={Link} to="/login">
-          Login
-        </Button>
-      </Toolbar>
-    </AppBar>
+    <header className="site-nav">
+      <div className="site-nav-inner">
+        <NavLink className="brand" to="/" end>
+          <span className="brand-mark">D</span>
+          <span>Devfolio</span>
+        </NavLink>
+        <nav className="nav-links" aria-label="Main navigation">
+          <NavLink to="/" end>Profile</NavLink>
+          <NavLink to="/projects">Projects</NavLink>
+          <NavLink to="/tasks">TaskFlow</NavLink>
+        </nav>
+      </div>
+    </header>
   );
 }

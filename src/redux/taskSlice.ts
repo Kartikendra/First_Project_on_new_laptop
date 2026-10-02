@@ -33,6 +33,12 @@ const taskSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    toggleTask: (state, action: PayloadAction<number>) => {
+      const task = state.list.find((item) => item.id === action.payload);
+      if (task) {
+        task.completed = !task.completed;
+      }
+    },
     addTaskRequest: (state, action: PayloadAction<Omit<Task, "id">>) => {
       state.loading = true;
     },
@@ -51,6 +57,7 @@ export const {
   fetchTasksRequest,
   fetchTasksSuccess,
   fetchTasksFailure,
+  toggleTask,
   addTaskRequest,
   addTaskSuccess,
   addTaskFailure,

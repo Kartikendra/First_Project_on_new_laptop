@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchTasksRequest, Task } from "../redux/taskSlice";
+import { fetchTasksRequest, toggleTask } from "../redux/taskSlice";
 import { RootState, AppDispatch } from "../redux/store";
-import { CircularProgress, List, ListItem, Checkbox } from "@mui/material";
 
 export default function TaskList() {
   const dispatch = useDispatch<AppDispatch>();
@@ -12,16 +11,23 @@ export default function TaskList() {
     dispatch(fetchTasksRequest());
   }, [dispatch]);
 
-  if (loading) return <CircularProgress />;
+  if (loading) return <p className="loading-state">Loading tasks...</p>;
 
   return (
-    <List>
-      {list.map((task: Task) => (
-        <ListItem key={task.id}>
-          <Checkbox checked={task.completed} />
-          {task.title}
-        </ListItem>
+    <ul className="task-list">
+      {list.map((task) => (
+        <li className="task-row" key={task.id}>
+          <label className={task.completed ? "task-label is-complete" : "task-label"}>
+            <input
+              className="task-checkbox"
+              type="checkbox"
+              onChange={() => dispatch(toggleTask(task.id))}
+              checked={task.completed}
+            />
+            <span>{task.title}</span>
+          </label>
+        </li>
       ))}
-    </List>
+    </ul>
   );
 }
