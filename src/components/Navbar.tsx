@@ -11,7 +11,6 @@ export default function Navbar() {
         <nav className="nav-links" aria-label="Main navigation">
           <NavLink to="/" end>Profile</NavLink>
           <NavLink to="/projects">Projects</NavLink>
-          <NavLink to="/tasks">TaskFlow</NavLink>
         </nav>
       </div>
     </header>
